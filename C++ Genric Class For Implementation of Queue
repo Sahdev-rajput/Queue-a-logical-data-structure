@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+template <class T>
+class Queue
+{
+private: 
+	int size;
+	int front;
+	int rear;
+	T* Q;
+public:
+	Queue()
+	{
+		cout << "Enter size of the Queue: ";
+		cin >> size;
+		front = -1;
+		rear = -1;
+		Q = new T[size];
+	}
+	void enqueue(T x)
+	{
+		if (rear == size - 1)
+		{
+			cout << "Stack is Full"<<endl;
+		}
+		else
+		{
+			rear++;
+			Q[rear] = x;
+		}
+	}
+	T dequeu()
+	{
+		T x = -1;
+		if (front == rear)
+		{
+			cout << "Stack is empty"<<endl;
+		}
+		else
+		{
+			front++;
+			x = Q[front];
+		}
+		return x;
+	}
+	void display();
+};
+template <class T>
+void Queue<T>::display()
+{
+		for (int i = front + 1; i <= rear; i++)
+		{
+			cout << Q[i] << "   ";
+		}
+}
+int main()
+{
+	Queue<float> a;
+	a.enqueue(20.6);
+	a.enqueue(23.7);
+	a.enqueue(55.8);
+	a.enqueue(-34.0);
+	a.display();
+	cout << endl << "Lets delete a element front position first " << a.dequeu();
+	a.display();
+}
