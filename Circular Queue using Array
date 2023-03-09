@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+struct Circularqueue
+{
+	int size;
+	int front;
+	int rear;
+	int* Q;
+};
+void create(struct Circularqueue* p)
+{
+	cout << "Enter the size: ";
+	cin >> p->size;
+	p->front = p->rear = 0;
+	p->Q = new int[p->size];
+}
+void enqueue(struct Circularqueue* p,int x)
+{
+	if ((p->rear + 1) % p->size == p->front)
+	{
+		cout << "Queue is Full" << endl;
+	}
+	else
+	{
+		p->rear = (p->rear + 1) % p->size;
+		p->Q[p->rear] = x;
+	}
+}
+int dequeue(struct Circularqueue* p)
+{
+	int x = -1;
+	if (p->rear == p->front)
+	{
+		cout << "Queue is empty";
+	}
+	else
+	{
+		x = p->Q[p->front];
+		p->front = (p->front + 1) % p->size;
+	}
+	return x;
+}
+void Display(struct Circularqueue p)
+{
+	int i = (p.front + 1) % p.size;
+	do
+	{
+		cout << p.Q[i] << " ";
+		i = (i + 1) % p.size;
+	} while (i <= p.rear);
+}
+int main()
+{
+	struct Circularqueue p;
+	create(&p);
+	enqueue(&p, 10);
+	enqueue(&p, 15);
+	enqueue(&p, 30);
+	dequeue(&p);
+	Display(p);
+}
