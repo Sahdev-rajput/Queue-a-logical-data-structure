@@ -1,0 +1,93 @@
+#include <iostream>
+using namespace std;
+struct queue
+{
+	int front;
+	int rear;
+	int size;
+	int* arr;
+};
+bool isFull(struct queue q)
+{
+	if (q.rear == q.size - 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool isEmpty(struct queue q)
+{
+	if (q.rear == q.front)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+void push(struct queue &q,int element)
+{
+	if (isFull(q))
+	{
+		cout << "Queue if full. No further element can be inserted. " << endl;
+	}
+	else
+	{
+		q.rear++;
+		q.arr[q.rear] = element;
+	}
+}
+int pop(struct queue &q)
+{
+	if(isEmpty(q))
+	{ 
+		cout << "Queue is already Empty.No further element can be deleted" << endl;
+	}
+	else
+	{
+		q.front++;
+		int temp = q.arr[q.front];
+		return temp;
+	}
+	return 0;
+}
+int top(struct queue q)
+{
+	return q.arr[q.rear];
+}
+void display(struct queue q)
+{
+	for (int i = q.front+1; i <=q.rear; i++)
+	{
+		cout << q.arr[i] << " ";
+	}
+	cout << endl;
+}
+int main()
+{
+	struct queue q;
+	q.front = q.rear = -1;
+	cout << "Enter the size of the queue you want: ";
+	cin >> q.size;
+	q.arr = new int[q.size];
+	push(q, 1);
+	push(q, 2);
+	push(q, 3);
+	push(q, 4);
+	push(q, 5);
+	push(q, 6);
+	cout << endl << endl << endl << "After inserting the queue is: " << endl;
+	display(q);
+	cout << endl << endl;
+	pop(q);
+	cout << endl << endl << endl << endl << "After deleting the element the queue is: " << endl;
+	display(q);
+	cout << endl << "The topmost element is: " << endl;
+	cout<<top(q);
+	cout << "                                               ------------*********-----------                                               ";
+	cout << endl;
+}
