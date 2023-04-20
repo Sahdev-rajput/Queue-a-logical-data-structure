@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 template <class T>
+//This is a class queue
 class Queue
 {
 private: 
